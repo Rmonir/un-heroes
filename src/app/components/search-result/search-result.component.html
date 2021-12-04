@@ -1,0 +1,89 @@
+<div class="search-bar">
+    <form>
+        <div class="inner-form">
+            <div class="input-field first-wrap">
+                <div class="svg-wrapper">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                        <path
+                            d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z">
+                        </path>
+                    </svg>
+                </div>
+                <input id="filterResults" name="filterResults" [(ngModel)]="filterInput" type="text"
+                    placeholder="You can filter search results!">
+            </div>
+        </div>
+    </form>
+</div>
+<ngx-datatable #searchResults class="material expandable" [columnMode]="ColumnMode.standard" [headerHeight]="50"
+    [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [rows]="heroesList |filter:filterInput"
+   >
+    <!-- Row Detail Template -->
+    <ngx-datatable-row-detail [rowHeight]="50" #myDetailRow>
+        <ng-template let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
+            <div class="row-details">
+                <p> Email : <a href="row.Email">{{ row.Email }}</a> , Phone : ({{ row.Phone | slice:0:3 }}) - {{
+                    row.Phone | slice:3:6 }} - {{ row.Phone |
+                    slice:6:10 }} , Country : {{ row.Company }} </p>
+                <p> Company : {{ row.Company }} , Date : {{ row.Date | date:'longDate' }}</p>
+            </div>
+        </ng-template>
+    </ngx-datatable-row-detail>
+    <!-- Column Templates -->
+    <ngx-datatable-column [width]="50" [resizeable]="false" [sortable]="false" [draggable]="false"
+        [canAutoResize]="false">
+        <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+            <a href="#" [class.datatable-icon-right]="!expanded" [class.datatable-icon-down]="expanded"
+                title="Expand/Collapse Row" (click)="toggleExpandRow(row)" class="desktop-hidden">
+            </a>
+        </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Name" [minWidth]="250" [sortable]="true" prop="Name">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+            {{ row.Name }}
+        </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Phone" [minWidth]="200" [sortable]="false">
+        <ng-template let-column="column" ngx-datatable-header-template>
+            <span class="mobile-hidden">{{ column.name }}</span>
+        </ng-template>
+        <ng-template let-row="row" let-value="Phone" ngx-datatable-cell-template>
+            <span class="mobile-hidden"> ({{ row.Phone | slice:0:3 }}) - {{ row.Phone | slice:3:6 }} - {{ row.Phone |
+                slice:6:10 }}</span>
+        </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Email" [minWidth]="250" [sortable]="false">
+        <ng-template let-column="column" ngx-datatable-header-template>
+            <span class="mobile-hidden">{{ column.name }}</span>
+        </ng-template>
+        <ng-template let-row="row" ngx-datatable-cell-template>
+            <span class="mobile-hidden">
+                <a href="row.Email">{{ row.Email }}</a>
+            </span>
+        </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Date" [minWidth]="200" [sortable]="false">
+        <ng-template let-column="column" ngx-datatable-header-template>
+            <span class="mobile-hidden">{{ column.name }}</span>
+        </ng-template>
+        <ng-template let-row="row" ngx-datatable-cell-template>
+            <span class="mobile-hidden">{{ row.Date | date:'longDate' }}</span>
+        </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Country" [minWidth]="200" [sortable]="false">
+        <ng-template let-column="column" ngx-datatable-header-template>
+            <span class="mobile-hidden">{{ column.name }}</span>
+        </ng-template>
+        <ng-template let-row="row" ngx-datatable-cell-template>
+            <span class="mobile-hidden">{{ row.Country }}</span>
+        </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Company" [minWidth]="200" [sortable]="true" prop="Company">
+        <ng-template let-column="column" ngx-datatable-header-template>
+            <span class="mobile-hidden">{{ column.name }}</span>
+        </ng-template>
+        <ng-template let-row="row" ngx-datatable-cell-template>
+            <span class="mobile-hidden">{{ row.Company }}</span>
+        </ng-template>
+    </ngx-datatable-column>
+</ngx-datatable>

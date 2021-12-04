@@ -1,0 +1,139 @@
+.search-bar {
+    display: flex;
+    -ms-flex-pack: center;
+    justify-content: center;
+    font-family: "Poppins", sans-serif;
+    background-position: bottom right;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    padding: 15px;
+}
+
+.search-bar form {
+    width: 100%;
+}
+
+.search-bar form .inner-form {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 7px;
+    overflow: hidden;
+}
+
+.search-bar form .inner-form .input-field {
+    height: 50px;
+}
+
+.search-bar form .inner-form .input-field input {
+    height: 100%;
+    background: transparent;
+    border: 0;
+    display: block;
+    width: 100%;
+    padding: 10px 0;
+    font-size: 16px;
+    color: #000;
+}
+
+.search-bar form .inner-form .input-field input.placeholder {
+    color: #222;
+    font-size: 16px;
+}
+
+.search-bar form .inner-form .input-field input:-moz-placeholder {
+    color: #222;
+    font-size: 16px;
+}
+
+.search-bar form .inner-form .input-field input::-webkit-input-placeholder {
+    color: #222;
+    font-size: 16px;
+}
+
+.search-bar form .inner-form .input-field input:hover,
+.search-bar form .inner-form .input-field input:focus {
+    box-shadow: none;
+    outline: 0;
+}
+
+.search-bar form .inner-form .input-field.first-wrap {
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    background: #d9f1e3;
+}
+
+.search-bar form .inner-form .input-field.first-wrap input {
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+}
+
+.search-bar form .inner-form .input-field.first-wrap .svg-wrapper {
+    min-width: 80px;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.search-bar form .inner-form .input-field.first-wrap svg {
+    width: 36px;
+    height: 36px;
+    fill: #222;
+}
+
+
+.search-bar form .info {
+    font-size: 15px;
+    color: #ccc;
+    padding-left: 26px;
+}
+
+@media screen and (max-width: 992px) {
+    .search-bar form .inner-form .input-field {
+        height: 50px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .search-bar form .inner-form .input-field.first-wrap .svg-wrapper {
+        min-width: 40px;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -ms-flex-align: center;
+        align-items: center;
+        padding: 0 10px;
+    }
+    .search-bar form .inner-form .input-field.first-wrap svg {
+        width: 26px;
+        height: 26px;
+        fill: #222;
+    }
+    
+}
+
+@media screen and (max-width: 800px) {
+    .desktop-hidden {
+        display: initial;
+    }
+    .mobile-hidden {
+        display: none;
+    }
+}
+@media screen and (min-width: 800px) {
+    .desktop-hidden {
+        display: none;
+    }
+    .mobile-hidden {
+        display: initial;
+    }
+}

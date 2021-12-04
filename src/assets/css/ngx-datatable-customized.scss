@@ -1,0 +1,43 @@
+
+.ngx-datatable.material {
+    background: #fff;
+    border: 1px solid lightgrey;
+    border-radius: 3px;
+    box-shadow: none;
+
+}
+
+.ngx-datatable.scroll-vertical {
+    height: 70vh;
+}
+
+.ngx-datatable {
+    display: block;
+    overflow: hidden;
+    justify-content: center;
+    position: relative;
+    transform: translateZ(0);
+    width:100%
+}
+
+.ngx-datatable, .info {
+    text-align: left;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.ngx-datatable.material .datatable-body .datatable-row-detail {
+    background: #f5f5f5;
+    padding: 10px;
+}
+
+.ngx-datatable .datatable-body .datatable-row-detail {
+    overflow-y: visible !important;
+}
+
+.row-details{
+    padding-left:30px; font-size:14px
+}
+.row-details p{
+    margin: 0px;
+}

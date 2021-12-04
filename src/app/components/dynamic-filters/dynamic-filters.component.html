@@ -1,0 +1,18 @@
+<div>
+    <h3> Filters</h3>
+    <aside>
+        <button *ngIf="collapsed" class="btn btn-expand " (click)="expand()">Expand</button>
+        <button *ngIf="!collapsed" class="btn btn-collaps" (click)="collapse()">Collapse</button>
+    </aside>
+    <div class="collapsible" [@collapse]="collapsed">
+        <form (ngSubmit)="onFilter()"  [formGroup]="form">
+            <div *ngFor="let control of  searchhFilters$ | async " class="form-row">
+                <app-filter  [control]="control" [form]="form" ></app-filter>
+            </div>
+            <div class="form-row">
+                <button class="btn btn-submit" type="submit">Filter</button>
+                <button class="btn btn-reset" type="button"  (click)="reset()" >Reset</button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,39 @@
+.flex-container {
+    flex-direction: row;
+    box-sizing: border-box;
+    display: flex;
+    flex: 1 1 1e-9px;
+    .filter {
+        flex-direction: row;
+        flex: 1 1 100%;
+        place-content: center;
+        box-sizing: border-box;
+        max-width: 20%;
+        background-color: #f2f2f2;
+        padding: 20px;
+        border: 1px solid lightgrey;
+        border-radius: 3px;
+        margin-right: 20px;
+    }
+    .search {
+        align-items: center;
+        flex-direction: row;
+        box-sizing: border-box;
+        flex: 1 1 100%;
+        max-width: 100%;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .flex-container {
+        flex-direction: column;
+    }
+    .filter {
+        max-width: 100% !important;
+        display: block;
+    }
+    .search {
+        max-width: 100% !important;
+        display: block;
+    }
+}

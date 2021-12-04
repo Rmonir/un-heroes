@@ -1,0 +1,8 @@
+<div class="flex-container">
+    <div class="filter">
+        <app-dynamic-filters #dynamicFiltersForm (onFilterEvent)="onSearch($event)" (onResetEvent)="onReset()"></app-dynamic-filters>
+    </div>
+    <div class="search">
+        <app-search-result #searchResults></app-search-result>
+    </div>
+</div>
