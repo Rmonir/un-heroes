@@ -1,7 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ColumnMode } from '@swimlane/ngx-datatable';
-import { combineLatest, Observable, of } from 'rxjs';
+import { combineLatest, of, Subscription } from 'rxjs';
 import { Hero } from 'src/app/models/hero.model';
 import { HeroesSearchService } from 'src/app/services/heroes-search.service';
 
@@ -10,7 +10,7 @@ import { HeroesSearchService } from 'src/app/services/heroes-search.service';
   templateUrl: './search-result.component.html',
   styleUrls: ['./search-result.component.scss']
 })
-export class SearchResultComponent implements OnInit {
+export class SearchResultComponent implements OnInit, OnDestroy {
 
   @ViewChild('searchResults') table: any;
   heroesList: Hero[] = [];
@@ -18,7 +18,7 @@ export class SearchResultComponent implements OnInit {
   expanded: any = {};
   timeout: any;
   //filterInput!:string;
-  a$: Observable<any> | undefined
+  sub: Subscription | undefined
   ColumnMode = ColumnMode;
 
   form!: FormGroup;
@@ -31,8 +31,7 @@ export class SearchResultComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
-    let sub = this.form.get("filterInput")?.valueChanges.subscribe(text => {
+    this.sub = this.form.get("filterInput")?.valueChanges.subscribe(text => {
       const combined = combineLatest([of(this.heroesFilterSourc), of(text)]);
       combined.subscribe(value => {
         this.heroesList = value[0].filter(c => c.Name?.toLowerCase().includes(text.trim().toLowerCase()) || c.Company?.toLowerCase().includes(value[1].trim().toLowerCase()))
@@ -40,6 +39,11 @@ export class SearchResultComponent implements OnInit {
     })
   }
 
+  ngOnDestroy(): void {
+    if (this.sub) {
+      this.sub.unsubscribe();
+    }
+  }
 
   toggleExpandRow(row: Hero) {
     this.table.rowDetail.toggleExpandRow(row);
