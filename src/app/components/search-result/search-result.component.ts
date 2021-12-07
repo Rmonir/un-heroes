@@ -37,6 +37,7 @@ export class SearchResultComponent implements OnInit, OnDestroy {
         this.heroesList = heros.filter(c => c.Name?.toLowerCase().includes(text.trim().toLowerCase()) || c.Company?.toLowerCase().includes(filter.trim().toLowerCase()))
       });
     })
+
   }
 
   ngOnDestroy(): void {
