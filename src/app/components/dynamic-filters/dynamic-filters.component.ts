@@ -61,17 +61,19 @@ export class DynamicFiltersComponent implements OnInit {
   }
 
   setFormGroup(searchObj: any) {
-    let group: any = {};
+   // let group: any = {};
     this.searchhFilters$.subscribe(filters => {
       filters.forEach(filter => {
         if (searchObj[filter.title] && searchObj[filter.title].length > 0) {
-          group[filter.title] = new FormControl(searchObj[filter.title]);
+          this.form.controls[filter.title].setValue(searchObj[filter.title])
+         // group[filter.title] = new FormControl(searchObj[filter.title]);
         } else {
-          group[filter.title] = new FormControl('');
+          this.form.controls[filter.title].setValue('')
+          //group[filter.title] = new FormControl('');
         }
       });
     })
-    this.form = new FormGroup(group);
+    //this.form = new FormGroup(group);
   }
 
   reset() {
