@@ -1,5 +1,5 @@
 <div class="search-bar">
-    <form>
+    <form  [formGroup]="form">
         <div class="inner-form">
             <div class="input-field first-wrap">
                 <div class="svg-wrapper">
@@ -9,14 +9,14 @@
                         </path>
                     </svg>
                 </div>
-                <input id="filterResults" name="filterResults" [(ngModel)]="filterInput" type="text"
-                    placeholder="You can filter search results!">
+                <input   formControlName="filterInput" type="text"   placeholder="You can filter search results!">
             </div>
         </div>
     </form>
 </div>
+<!-- heroesList |filter:filterInput -->
 <ngx-datatable #searchResults class="material expandable" [columnMode]="ColumnMode.standard" [headerHeight]="50"
-    [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [rows]="heroesList |filter:filterInput"
+    [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [rows]="heroesList"
    >
     <!-- Row Detail Template -->
     <ngx-datatable-row-detail [rowHeight]="50" #myDetailRow>

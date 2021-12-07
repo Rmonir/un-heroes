@@ -92,11 +92,14 @@ export class SearchPageComponent implements OnInit, OnDestroy {
   bindAllData() {
     this.heroesListSub = this.searchService.allHeroesData.subscribe(heroes => {
       this.searchResults.heroesList = heroes as Hero[];
+      this.searchResults.heroesFilterSourc=heroes as Hero[];
+
     })
   }
   search(searchObj: Hero) {
     this.heroesListSub = this.searchService.searchForHeroes(searchObj).subscribe(result => {
       this.searchResults.heroesList = result;
+      this.searchResults.heroesFilterSourc=result;
     })
   }
 
