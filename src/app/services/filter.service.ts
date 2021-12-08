@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { map, toArray } from 'rxjs/operators'
 import { countries } from '../data/countries-list';
 import { SearchFilters } from '../data/filters-settings.config';
 
