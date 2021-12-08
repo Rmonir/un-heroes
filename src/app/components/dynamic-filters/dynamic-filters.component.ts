@@ -1,7 +1,7 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Params } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { CommonService } from 'src/app/services/common.service';
 import { FilterService } from 'src/app/services/filter.service';
 import {
@@ -28,8 +28,9 @@ const DEFAULT_DURATION = 300;
     ])
   ]
 })
-export class DynamicFiltersComponent implements OnInit {
+export class DynamicFiltersComponent implements OnInit, OnDestroy {
 
+  searchhFiltersSub: Subscription | undefined;
   searchhFilters$!: Observable<any[]>;
   form!: FormGroup;
   @Output() onFilterEvent: EventEmitter<Params> = new EventEmitter<Params>();
@@ -41,10 +42,17 @@ export class DynamicFiltersComponent implements OnInit {
     this.searchhFilters$ = this.filterService.getSearchFilters();
     this.form = new FormGroup(this.getFormGroup());
   }
+ 
 
   ngOnInit(): void {
   }
 
+  ngOnDestroy(): void {
+    if (this.searchhFiltersSub) {
+      this.searchhFiltersSub.unsubscribe();
+    }
+  }
+  
   onFilter() {
     let queryString = this.commonService.getQueryParams(this.form);
     this.onFilterEvent.emit(queryString);
@@ -52,7 +60,7 @@ export class DynamicFiltersComponent implements OnInit {
 
   getFormGroup() {
     let group: any = {};
-    this.searchhFilters$.subscribe(filters => {
+    this.searchhFiltersSub = this.searchhFilters$.subscribe(filters => {
       filters.forEach(filter => {
         group[filter.title] = new FormControl('');
       });
@@ -61,12 +69,12 @@ export class DynamicFiltersComponent implements OnInit {
   }
 
   setFormGroup(searchObj: any) {
-   // let group: any = {};
-    this.searchhFilters$.subscribe(filters => {
+    // let group: any = {};
+    this.searchhFiltersSub = this.searchhFilters$.subscribe(filters => {
       filters.forEach(filter => {
         if (searchObj[filter.title] && searchObj[filter.title].length > 0) {
           this.form.controls[filter.title].setValue(searchObj[filter.title])
-         // group[filter.title] = new FormControl(searchObj[filter.title]);
+          // group[filter.title] = new FormControl(searchObj[filter.title]);
         } else {
           this.form.controls[filter.title].setValue('')
           //group[filter.title] = new FormControl('');
@@ -74,6 +82,8 @@ export class DynamicFiltersComponent implements OnInit {
       });
     })
     //this.form = new FormGroup(group);
+
+
   }
 
   reset() {
