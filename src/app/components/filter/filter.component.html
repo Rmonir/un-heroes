@@ -5,8 +5,8 @@
         <input [formControlName]="control.title" *ngSwitchCase="'date'" [type]="control.type" [min]="control.minDate"
             [max]="control.maxDate" />
         <select *ngSwitchCase="'dropdown'" [formControlName]="control.title" [multiple]="control.multiple">
-            <option  [value]="-1">--- Select ---</option>
-            <option *ngFor="let opt of listOptions" [value]="opt.Alpha3Code">{{opt.Name}}</option>
+            <option  [ngValue]="-1">--- Select ---</option>
+            <option *ngFor="let opt of listOptions" [ngValue]="opt.Alpha3Code">{{opt.Name}}</option>
         </select>
     </div>
 </div>

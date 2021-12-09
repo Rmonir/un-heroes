@@ -32,12 +32,13 @@ export class SearchResultComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.sub = this.form.get("filterInput")?.valueChanges.subscribe(text => {
-      const combined = combineLatest([of(this.heroesFilterSourc), of(text)]);
-      combined.subscribe(([heros,filter]) => {
-        this.heroesList = heros.filter(c => c.Name?.toLowerCase().includes(text.trim().toLowerCase()) || c.Company?.toLowerCase().includes(filter.trim().toLowerCase()))
-      });
+      this.heroesList = this.heroesFilterSourc.filter(c => c.Name?.toLowerCase().includes(text.trim().toLowerCase()) 
+                                                      || c.Company?.toLowerCase().includes(text.trim().toLowerCase()))
+      // const combined = combineLatest([of(this.heroesFilterSourc), of(text)]);
+      // combined.subscribe(([heros,filter]) => {
+      //   this.heroesList = heros.filter(c => c.Name?.toLowerCase().includes(filter.trim().toLowerCase()) || c.Company?.toLowerCase().includes(filter.trim().toLowerCase()))
+      // });
     })
-
   }
 
   ngOnDestroy(): void {
