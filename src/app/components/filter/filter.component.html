@@ -6,7 +6,7 @@
             [max]="control.maxDate" />
         <select *ngSwitchCase="'dropdown'" [formControlName]="control.title" [multiple]="control.multiple">
             <option  [ngValue]="-1">--- Select ---</option>
-            <option *ngFor="let opt of listOptions" [ngValue]="opt.Alpha3Code">{{opt.Name}}</option>
+            <option *ngFor="let opt of filterService.getSelectOptions(control.api)  | async " [ngValue]="opt.Alpha3Code">{{opt.Name}}</option>
         </select>
     </div>
 </div>

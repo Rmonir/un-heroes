@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Params } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
@@ -26,7 +26,8 @@ const DEFAULT_DURATION = 300;
       transition('false => true', animate(DEFAULT_DURATION + 'ms ease-in')),
       transition('true => false', animate(DEFAULT_DURATION + 'ms ease-out'))
     ])
-  ]
+  ],
+  changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class DynamicFiltersComponent implements OnInit, OnDestroy {
 
@@ -43,7 +44,6 @@ export class DynamicFiltersComponent implements OnInit, OnDestroy {
     this.form = new FormGroup(this.getFormGroup());
   }
  
-
   ngOnInit(): void {
   }
 

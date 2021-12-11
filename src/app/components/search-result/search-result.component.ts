@@ -34,6 +34,7 @@ export class SearchResultComponent implements OnInit, OnDestroy {
     this.sub = this.form.get("filterInput")?.valueChanges.subscribe(text => {
       this.heroesList = this.heroesFilterSourc.filter(c => c.Name?.toLowerCase().includes(text.trim().toLowerCase()) 
                                                       || c.Company?.toLowerCase().includes(text.trim().toLowerCase()))
+      // this in case we are loading datat from api as observables
       // const combined = combineLatest([of(this.heroesFilterSourc), of(text)]);
       // combined.subscribe(([heros,filter]) => {
       //   this.heroesList = heros.filter(c => c.Name?.toLowerCase().includes(filter.trim().toLowerCase()) || c.Company?.toLowerCase().includes(filter.trim().toLowerCase()))

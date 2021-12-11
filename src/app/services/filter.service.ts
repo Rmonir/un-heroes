@@ -15,6 +15,7 @@ export class FilterService {
   getSelectOptions(url: string): Observable<any[]> {
     if (url && url.length > 0) {
       // return api service getter
+      console.log(countries);
       return of(countries);
     } else {
       return new Observable<any[]>()
